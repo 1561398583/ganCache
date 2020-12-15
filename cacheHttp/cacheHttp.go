@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-//提供http功能
+//提供http功能，单机版
 //url格式：
 //"https://example.net:8000/<key>"
 

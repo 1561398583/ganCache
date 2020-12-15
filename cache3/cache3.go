@@ -9,7 +9,7 @@ import (
 //支持用户自定义Find，Find的功能为当cache中没找到数据时，去哪里获取数据（文件、数据库、网络...）
 type CacheWithGetter struct {
 	//并发安全的数据容器
-	c *cache2.CacheWithMutex
+	c *cache2.SafeCache
 	//用户自定义的getter，当缓存不存在时的回调函数
 	finder	Finder
 }
@@ -58,7 +58,7 @@ func (g *CacheWithGetter) Get(key string) ([]byte, error) {
 
 func NewCacheWithGetter(cacheSize int64, finder Finder) *CacheWithGetter {
 	cg := &CacheWithGetter{
-		c:      cache2.NewCacheWithMutex(cacheSize),
+		c:      cache2.NewSafeCache(cacheSize),
 		finder: finder,
 	}
 
